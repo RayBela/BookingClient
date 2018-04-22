@@ -1,0 +1,154 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+    <head>
+        <title>Booking Flights</title>
+        <meta charset="utf-8"/>
+        <meta name="viewport" content="width=device-width, initial-scale=1"/>
+        <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css"/>
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+        <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+        <!-- Latest compiled and minified CSS -->
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-select/1.12.4/css/bootstrap-select.min.css"/>
+
+        <!-- Latest compiled and minified JavaScript -->
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-select/1.12.4/js/bootstrap-select.min.js"></script>
+
+        <!-- (Optional) Latest compiled and minified JavaScript translation files -->
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-select/1.12.4/js/i18n/defaults-*.min.js"></script>
+
+        <style>
+            /* Remove the navbar's default margin-bottom and rounded borders */ 
+            .navbar {
+                margin-bottom: 0;
+                border-radius: 0;
+
+            }
+
+            /* Add a gray background color and some padding to the footer */
+            .footer {
+                position: fixed;
+                left: 0;
+                bottom: 0;
+                width: 100%;
+                height: 60px;
+                font-family: 'Open Sans', sans-serif;
+                background-color: #f2f2f2;
+                color:#37517E;
+                text-align: center;
+                padding-top: 20px;
+            }
+
+
+            .jumbotron {
+                background-color:#8accb3;
+                color:#ffffff;
+                height: 230px;
+            }
+
+            .btn-primary
+            {
+                background-color:#37517E;
+                color:#ffffff;
+                text-align: center;
+                color:#ffffff;
+                font-size: 15px;
+                border-radius: 4px;
+                margin: 20px auto;
+            }
+            
+            .book{
+                padding: 10px;
+                padding-bottom: 20px;
+            }
+            footer {
+                background-color: #555;
+                color: white;
+                padding: 15px;
+                bottom: 0px;
+
+            }
+            
+            .navbar-brand{
+                color:#99ffcc;
+            }
+
+        </style>
+    </head>
+    <body>
+
+        <nav class="navbar navbar-inverse">
+            <div class="container-fluid">
+                <div class="navbar-header">
+                    <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#myNavbar">
+                        <span class="icon-bar"></span>
+                        <span class="icon-bar"></span>
+                        <span class="icon-bar"></span>                        
+                    </button>
+                    <a class="navbar-brand active" href="http://localhost:8080/home">Flight Booking</a>
+                </div>
+                <div class="collapse navbar-collapse" id="myNavbar">
+                    <ul class="nav navbar-nav">
+                        <li><a href="http://localhost:8080/home">Home</a></li>
+                        <li><a href="#">API Documentation</a></li>
+                    </ul>
+                </div>
+            </div>
+        </nav>
+
+
+
+
+
+        <div class="container">
+            <h3 class= "book">Select a Flight !</h3>
+
+            <div class="row">
+            <table class="table table table-hover">
+                <thead>
+                    <tr>
+                        <th></th>
+                        <th>Select</th>
+                        <th>Origin</th>
+                        <th>Destination</th> 
+                        <th>Flight Number</th>
+                        <th>Departure Date</th>
+                        <th>Arrival Date</th>
+                        <th>Price</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr th:each="flight : ${flights}">
+                        <td th:value="${flight.id}"></td>
+                        <td class="vcenter"><input name = "flight" type="checkbox" id="selectedFlight" value="1"/></td>
+                        <td th:text="${flight.origin.name}"></td>
+                        <td th:text="${flight.destination.name}"></td>
+                        <td th:text="${flight.flightNumber}"></td>
+                        <td th:text="${flight.departureTime}"></td>
+                        <td th:text="${flight.arrivalTime}"></td>
+                        <td th:text="${flight.price}"> euro</td>
+                    </tr>
+                </tbody>
+            </table>
+            </div>
+            <div class = "row">
+                <div class="form-group">        
+                    <div class="col-sm-2 text-center">
+                        <button type="submit" class="btn btn-primary btn-block" id="submit" >Continue Booking !</button>
+                    </div>
+                </div>
+
+            </div>
+       </div>
+
+
+        <footer class="container-fluid text-center">
+            <p>Web service developed by : Abdulghani, Mikhail and Rayhane</p>
+        </footer>
+
+        <!-- 
+        <footer class="container-fluid text-center">
+            <p>Web service developed by : Abdulghani, Mikhail and Rayhane</p>
+        </footer>-->
+
+    </body>
+</html>
