@@ -39,4 +39,12 @@ public class FlightService {
         return flightResponse.getBody();
     }
 
+    Flight getFlightById(String flightId) {
+        ResponseEntity<Flight> flightResponse
+                = restTemplate.exchange("http://localhost:8086/api/flights/" + flightId,
+                        HttpMethod.GET, null, new ParameterizedTypeReference<Flight>() {
+                });
+        return flightResponse.getBody();
+    }
+
 }
