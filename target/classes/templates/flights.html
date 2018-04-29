@@ -122,6 +122,7 @@
                             <th>Departure Date</th>
                             <th>Arrival Date</th>
                             <th>Price</th>
+                            <th></th>
                         </tr>
                     </thead>
                     <tbody>
@@ -133,18 +134,12 @@
                             <td th:text="${flight.departureTime}"></td>
                             <td th:text="${flight.arrivalTime}"></td>
                             <td th:text="${new java.text.DecimalFormat('# $,##0.00;$-#,##0.00').format(flight.price)}"></td>
+                            <td><button name="button" class="btn btn-success submit" >Book<i class="fa fa-angle-right"></i></button></td>
                         </tr>
                     </tbody>
                 </table>
             </div>
-            <div class = "row">
-                <div class="form-group">        
-                    <div class="col-sm-2 text-center">
-                        <button type="submit" class="btn btn-primary btn-block" id="submit" >Continue Booking !</button>
-                    </div>
-                </div>
-
-            </div>
+          
         </div>
 
 
@@ -165,7 +160,7 @@
             });
 
 
-            $('#submit').on('click', function () {
+            $('.submit').on('click', function () {
                 var flightId = $('.flight-row.active #selectedFlight').val();
                 if (flightId == undefined) {
                     alert("Please select valid flight");

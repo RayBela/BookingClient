@@ -69,7 +69,6 @@
                 padding-bottom: 20px;
             }
             footer {
-                position: fixed;
                 background-color: #555;
                 color: white;
                 padding: 15px;
@@ -81,6 +80,16 @@
             .navbar-brand{
                 color:#99ffcc;
             }
+
+            .panel{
+                margin: 20px;
+                text-align: center;
+            }
+            .col-centered{
+                float: none;
+                margin: 0 auto;
+            }
+
         </style>
     </head>
     <body>
@@ -98,7 +107,7 @@
                 <div class="collapse navbar-collapse" id="myNavbar">
                     <ul class="nav navbar-nav">
                         <li><a href="http://localhost:8080/home">Home</a></li>
-                        <li><a href="#">APIDocumentation</a></li>
+                        <li><a href="#">API Documentation</a></li>
                     </ul>
                 </div>
             </div>
@@ -107,24 +116,65 @@
 
 
         <div class="container">
+            <div class="panel panel-success">
+                <div class="panel-heading">Booking Successful !</div>
+                <div class="panel-body">
+                    <div class='row'>
+                        <div class=' col-md-6 col-centered'>
+                            <h3>Your Booking details :</h3>
 
-            <div class="container">
-                <h2 style='color:green'>Booking Successful! </h2>
-                <h2 style='color:green'>Booking ID: </h2>
-                <div class='col-md-12'>
-                    <div class='col-md-3'>
-                        <h3 th:text="${booking.id}"></h3>
+                            <h4> Flights :</h4>
+                            <div th:each="flight : ${booking.flights}" class="panel-group">
+                                <div class="panel panel-default">
+                                    <div class="panel-heading">
+                                        <h4 class="panel-title">
+                                            <a th:text="${'Flight: ' + flight.origin.iata} + ' -> ' + ${flight.destination.iata} " data-toggle="collapse" href="#collapse1"></a>
+                                        </h4>
+                                    </div>
+                                    <div id="collapse1" class="panel-collapse collapse">
+                                        <ul class="list-group">
+                                            <li th:text="${'From: '+flight.origin.name}" class="list-group-item"></li>
+                                            <li th:text="${'To: '+flight.destination.name}" class="list-group-item"></li>
+                                            <li th:text="${'Price: '+flight.price + '$'}" class="list-group-item"></li>
+
+                                        </ul>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <h4> Travellers :</h4>
+                            <div th:each="traveller : ${booking.travellers}" class="panel-group">
+                                <div class="panel panel-default">
+                                    <div class="panel-heading">
+                                        <h4 class="panel-title">
+                                            <a th:text="${traveller.firstName} + ' ' + ${traveller.lastName} " data-toggle="collapse" href="#collapse2"></a>
+                                        </h4>
+                                    </div>
+                                    <div id="collapse2" class="panel-collapse collapse">
+                                        <ul class="list-group">
+                                            <li th:text="${'Passport ID: '+traveller.passportId}" class="list-group-item"></li>
+                                            <li th:text="${'Phone Number: '+traveller.phoneNumber}" class="list-group-item"></li>
+                                            <li th:text="${'Email: '+traveller.email}" class="list-group-item"></li>
+
+
+                                        </ul>
+                                    </div>
+                                </div>
+                            </div>
+
+
+                            <h4 th:text="${'Total Price: ' + booking.totalAmount} + ' $ '" ></h4>
+
+
+                            <button type="button" class="btn btn-primary">Proceed to payment !</button>
+
+                        </div>
                     </div>
                 </div>
-                <h3>Booking Information:</h3>
             </div>
         </div>
 
 
-
-        <footer class="container-fluid text-center">
-            <p>Web service developed by : Abdulghani, Mikhail and Rayhane</p>
-        </footer>
 
         <!-- Extra JavaScript/CSS added manually in "Settings" tab -->
         <!-- Include jQuery -->

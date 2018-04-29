@@ -5,6 +5,7 @@
  */
 package com.miage.bookingclient.controllers;
 
+import com.miage.bookingclient.models.Traveller;
 import com.miage.bookingclient.models.Booking;
 import com.miage.bookingclient.models.Flight;
 import java.text.SimpleDateFormat;

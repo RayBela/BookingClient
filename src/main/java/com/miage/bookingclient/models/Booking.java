@@ -5,7 +5,6 @@
  */
 package com.miage.bookingclient.models;
 
-import com.miage.bookingclient.controllers.Traveller;
 import java.util.Date;
 import java.util.List;
 import org.springframework.format.annotation.DateTimeFormat;

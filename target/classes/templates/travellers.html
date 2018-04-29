@@ -48,10 +48,12 @@
             }
 
 
-            .jumbotron {
+            .jumbtron {
                 background-color:#8accb3;
                 color:#ffffff;
-                height: 230px;
+                font-size:16px;
+                height: 75px;
+                margin-bottom: 20px;
             }
 
             .btn-primary
@@ -69,23 +71,50 @@
                 padding-bottom: 20px;
             }
             footer {
-                position: fixed;
                 background-color: #555;
                 color: white;
                 padding: 15px;
-                left: 0;
-                bottom: 0;
                 width: 100%;
             }
 
             .navbar-brand{
                 color:#99ffcc;
             }
-            .flightinfo{
-                margin-bottm: 20px;
+
+            .travel-text{
+                text-align:center;
+                font-size: 25px;
                 margin-top: 20px;
-                border-bottom: 2px dashed;
-                border-top: 2px dashed;
+            }
+
+            .form {
+                margin: 30px 60px;
+            }
+
+            .flights{
+                margin: 10px;
+            }
+
+            .center_div{
+                margin: 30px 100px;
+                width:100% ;
+            }
+
+            .col-centered{
+                float: none;
+                margin: 0 auto;
+            }
+            
+            .destination{
+                margin-left: 120px;
+            }
+
+            .origin{
+                margin-left: 40px;
+            }
+
+            .fa-plane{
+                text-align: center;
             }
 
         </style>
@@ -105,7 +134,7 @@
                 <div class="collapse navbar-collapse" id="myNavbar">
                     <ul class="nav navbar-nav">
                         <li><a href="http://localhost:8080/home">Home</a></li>
-                        <li><a href="#">APIDocumentation</a></li>
+                        <li><a href="#">API Documentation</a></li>
                     </ul>
                 </div>
             </div>
@@ -113,83 +142,98 @@
 
 
 
-        <div class="container">
 
-            <div class="container">
-                <h2>Adding Travellers </h2>
-                <div class='col-md-12 flightinfo'>
-                    <div class='col-md-3'>
-                        <h3 th:text="${flight.origin.name}"></h3>
-                    </div>
-                    <div class='col-md-1' style='font-size:xx-large'>
-                        <i class='fa fa-plane'></i>
-                    </div>
-                    <div class='col-md-3'>
-                        <h3 th:text="${flight.destination.name}"></h3>
+
+        <div class="container">
+                <div class= "panel panel-default form">
+                    <div class="panel-heading">Flight information</div>
+                    <div class="panel-body">
+                            <div class="col-md-4 destination">
+                                <h4>Flight Destination: </h4>
+                                <p th:text="${flight.origin.iata}"></p>
+                                <p th:text="${flight.origin.name}"></p>
+                                <p th:text="${'Duration : ' + flight.duration} + ' hours'"></p>
+                                
+                            </div>
+
+                            <div class="col-md-2 icon">
+                                <i class="fa fa-plane" style="font-size:50px;"></i>
+                            </div>
+
+                            <div class="col-md-4 origin">
+                                <h4>Flight Origin: </h4>
+                                <p th:text="${flight.destination.iata}"></p>
+                                <p th:text="${flight.destination.name}"></p>
+                                <p th:text="${'Duration : ' + flight.duration} + ' hours'"></p>
+                            </div>
                     </div>
                 </div>
-                <h3>Traveller information</h3>
-                <form class="form-horizontal" action="/travel" method='POST'>
-                    <div class="form-group">
-                        <input type="hidden" name="flightId" th:value="${flight.id}" />
-                        <label class="control-label col-sm-2" for="email">First Name:</label>
-                        <div class="col-sm-2">
-                            <input type="text" class="form-control" id="email" placeholder="Enter first name" name="firstName"/>
-                        </div>
-                        <label class="control-label col-sm-2" for="email">Last name:</label>
-                        <div class="col-sm-2">
-                            <input type="text" class="form-control" id="email" placeholder="Enter last name" name="lastName"/>
-                        </div>
-                    </div>
+            <div class="panel panel-default form">
+                <div class="panel-heading">Traveller information</div>
+                <div class="panel-body">
 
-                    <div class="form-group">
-                        <label class="control-label col-sm-2" for="email">Passport Number:</label>
-                        <div class="col-sm-6">
-                            <input type="number" class="form-control" id="email" placeholder="Enter passport ID " name="passportId"/>
+                    <form class="form-horizontal center_div" action="/travel" method='POST'>
+                        <div class="form-group">
+                            <input type="hidden" name="flightId" th:value="${flight.id}" />
+                            <label class="control-label col-sm-2" for="email">First Name:</label>
+                            <div class="col-sm-2">
+                                <input required ="required" type="text" class="form-control" id="fname" placeholder="Enter first name" name="firstName"/>
+                            </div>
+                            <label class="control-label col-sm-2" for="email">Last name:</label>
+                            <div class="col-sm-2">
+                                <input required ="required"  type="text" class="form-control" id="lname" placeholder="Enter last name" name="lastName"/>
+                            </div>
                         </div>
-                    </div>
-                    <div class="form-group">
-                        <label class="control-label col-sm-2" for="email">Phone number:</label>
-                        <div class="col-sm-6">
-                            <input type="number" class="form-control" id="email" placeholder="Enter Phone Number" name="phoneNumber"/>
+
+                        <div class="form-group">
+                            <label class="control-label col-sm-2" for="email">Passport Number:</label>
+                            <div class="col-sm-6">
+                                <input required ="required"  type="number" class="form-control" id="passnumber" placeholder="Enter passport ID " name="passportId"/>
+                            </div>
                         </div>
-                    </div>
-                    <div class="form-group ">
-                        <label class="control-label col-sm-2 requiredField" for="email">
-                            Email
-                        </label>
-                        <div class="col-sm-6">
-                            <input class="form-control" id="email" name="email" type="email"/>
-                        </div></div>
-
-                    <div class="form-group ">
-                        <label class="control-label col-sm-2 " for="date">
-                            Date of Birth
-                        </label><div class="col-sm-6">
-                            <div class="input-group">
-                                <div class="input-group-addon">
-                                    <i class="fa fa-calendar">
-                                    </i>
-                                </div>
-
-                                <input class="form-control" id="date" name="dateOfBirth" placeholder="MM/DD/YYYY" type="text"/>
+                        <div class="form-group">
+                            <label class="control-label col-sm-2" for="email">Phone number:</label>
+                            <div class="col-sm-6">
+                                <input required ="required"  type="number" class="form-control" id="phonenumber" placeholder="Enter Phone Number" name="phoneNumber"/>
+                            </div>
+                        </div>
+                        <div class="form-group ">
+                            <label class="control-label col-sm-2 requiredField" for="email">
+                                Email
+                            </label>
+                            <div class="col-sm-6">
+                                <input required ="required"  class="form-control" id="email" aria-describedby="emailHelp" name="email" type="email"/>
                             </div></div>
-                    </div>
 
-                    <div class="form-group">        
-                        <div class="col-sm-offset-2 col-sm-10">
-                            <button type="submit" class="btn btn-primary">Proceed to Payement</button>
+                        <div class="form-group ">
+                            <label class="control-label col-sm-2 " for="date">
+                                Date of Birth
+                            </label><div class="col-sm-6">
+                                <div class="input-group">
+                                    <div class="input-group-addon">
+                                        <i class="fa fa-calendar">
+                                        </i>
+                                    </div>
+
+                                    <input required ="required" class="form-control" id="date" name="dateOfBirth" placeholder="MM/DD/YYYY" type="text"/>
+                                </div></div>
                         </div>
-                    </div>
-                </form>
-            </div>
 
+                        <div class="form-group">        
+                            <div class="col-sm-offset-2 col-sm-10">
+                                <button type="submit" class="btn btn-primary">Confirm Booking</button>
+                            </div>
+                        </div>
+                    </form>
+                </div>
+            </div>
         </div>
 
 
 
+
         <footer class="container-fluid text-center">
-            <p>Web service developed by : Abdulghani, Mikhail and Rayhane</p>
+            <p>Web service developed by : Tamer, Mikhail and Rayhane</p>
         </footer>
 
         <!-- Extra JavaScript/CSS added manually in "Settings" tab -->
@@ -202,10 +246,10 @@
 
         <script>
             $(document).ready(function () {
-                var date_input = $('input[name="date"]'); //our date input has the name "date"
+                var date_input = $('input[name="dateOfBirth"]'); //our date input has the name "date"
                 var container = $('.bootstrap-iso form').length > 0 ? $('.bootstrap-iso form').parent() : "body";
                 date_input.datepicker({
-                    format: 'mm/dd/yyyy',
+                    format: 'dd/mm/yyyy',
                     container: container,
                     todayHighlight: true,
                     autoclose: true,
